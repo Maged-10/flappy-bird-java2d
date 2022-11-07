@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.example;
 
 import java.awt.Color;
@@ -9,10 +5,6 @@ import java.awt.Rectangle;
 import java.awt.Graphics;
 import java.awt.Image;
 
-/**
- *
- * @author User
- */
 public class Bird {
     public float x, y, vx, vy;
     public Rectangle imgRect;

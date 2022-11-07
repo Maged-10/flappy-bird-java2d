@@ -14,10 +14,6 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 
-/**
- *
- * @author User
- */
 public class GamePanel extends JPanel {
     
     private Bird bird;

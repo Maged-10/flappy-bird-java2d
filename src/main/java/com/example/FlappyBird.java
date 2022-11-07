@@ -17,10 +17,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-/**
- *
- * @author User
- */
 public class FlappyBird implements ActionListener {
     
     public static final int WIDTH = 900, HEIGHT = 600, DELAY = 10;
@@ -67,7 +63,6 @@ public class FlappyBird implements ActionListener {
                 rects.add(r2);
             }
             ArrayList<Rectangle> toRemove = new ArrayList<Rectangle>();
-            // boolean game = true;
             isGameOver = false;
             for(Rectangle r : rects) {
                 r.x-=3;
@@ -75,11 +70,9 @@ public class FlappyBird implements ActionListener {
                     toRemove.add(r);
                 }
                 if(r.intersects(bird.imgRect)) {
-                    // game = false;
                     isGameOver = true;
                 }
-                /* If bird reaches center of the column, add 1 to score; checks only for the 
-                upper pipe; -10 to account for the x-axis-speed */
+                // If bird reaches center of the column, add 1 to score
                 if (r.y == 0 && bird.x + bird.imgRect.width / 2 > r.x + r.width / 2 - 2 && 
                     bird.x + bird.imgRect.width / 2 < r.x + r.width / 2 + 2) {
                     score++;
@@ -89,7 +82,6 @@ public class FlappyBird implements ActionListener {
             isRenderRectangle++;
 
             if(bird.y > HEIGHT || bird.y+bird.sideLength < 0) {
-                // game = false;
                 isGameOver = true;
             }
 
@@ -103,7 +95,7 @@ public class FlappyBird implements ActionListener {
         }
     }
 
-    public void attachCallbacks() {
+    private void attachCallbacks() {
         frame.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
