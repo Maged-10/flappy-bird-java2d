@@ -1,6 +1,5 @@
 package com.example;
 
-import java.io.File;
 import java.io.IOException;
 import java.awt.Image;
 import javax.imageio.ImageIO;
@@ -14,7 +13,8 @@ public class ImageHelper {
 
     public static Image getBird() {
         try {
-            BIRD = ImageIO.read(new File("target/classes/assets/redbird-midflap.png"));
+            BIRD = ImageIO.read(ImageHelper.class.getClassLoader()
+                .getResource("assets/redbird-midflap.png"));
         }
         catch(IOException e) {
             e.printStackTrace();
@@ -24,7 +24,8 @@ public class ImageHelper {
 
     public static Image getPillar() {
         try {
-        PILLAR = ImageIO.read(new File("target/classes/assets/pipe-red.png"));
+        PILLAR = ImageIO.read(ImageHelper.class.getClassLoader()
+            .getResource("assets/pipe-red.png"));
         } catch(IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +34,8 @@ public class ImageHelper {
 
     public static Image getBackground() {
         try {
-            BACKGROUND = ImageIO.read(new File("target/classes/assets/background-night.png"));
+            BACKGROUND = ImageIO.read(ImageHelper.class.getClassLoader()
+                .getResource("assets/background-night.png"));
         } catch(IOException e) {
             e.printStackTrace();
         }
