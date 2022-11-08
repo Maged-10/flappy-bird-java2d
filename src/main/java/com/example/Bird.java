@@ -22,6 +22,10 @@ public class Bird {
         vy+=0.8f;
     }
 
+    /**
+     * Repaint bird at new coordinates
+     * @param g Graphics
+     */
     public void repaint(Graphics g) {
         g.setColor(Color.BLACK);
         int newX = Math.round(x-sideLength);
@@ -34,6 +38,9 @@ public class Bird {
         vy = -10;
     }
     
+    /**
+     * Reset bird position
+     */
     public void reset() {
         x = FlappyBird.WIDTH / 2;
         y = FlappyBird.HEIGHT / 2;

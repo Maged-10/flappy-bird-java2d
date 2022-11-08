@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.awt.Image;
 import javax.imageio.ImageIO;
 
+/** Helper Class to load Images */
 public class ImageHelper {
     private static Image PILLAR, BACKGROUND, BIRD;
 

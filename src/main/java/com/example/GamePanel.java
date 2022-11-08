@@ -33,19 +33,20 @@ public class GamePanel extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         g.setColor(bg);
-        g.fillRect(0,0,FlappyBird.WIDTH,FlappyBird.HEIGHT);
         g.drawImage(background, 0, 0, FlappyBird.WIDTH, FlappyBird.HEIGHT, null);
         bird.repaint(g);
-
+        // Draw vertical pipes
         for(Rectangle r : rects) {
             Graphics2D g2d = (Graphics2D) g;
             AffineTransform old = g2d.getTransform();
             g2d.translate(r.x, r.y);
+            // Render upper pipe
             if(r.y < FlappyBird.HEIGHT/2) {
                 g2d.translate(0, r.height);
                 g2d.rotate(Math.PI);
                 g2d.drawImage(pillar, 0, 0, -GamePanel.PILLAR_WIDTH, r.height, null);
             } else {
+                // Render lower pipe
                 g2d.drawImage(pillar, 0, 0, GamePanel.PILLAR_WIDTH, r.height, null);
             }
             g2d.setTransform(old);
@@ -64,6 +65,11 @@ public class GamePanel extends JPanel {
         }
     }
 
+    /**
+     * Helper method to draw strings
+     * @param str Array of string
+     * @param g Graphics
+     */
     public void drawString(String[] str, Graphics g) {
         g.setFont(textFont);
         g.setColor(Color.DARK_GRAY);

@@ -26,6 +26,9 @@ public class FlappyBird implements ActionListener {
     private boolean isGameOver;
     private boolean isPaused;
     
+    /**
+     * Start the game
+     */
     public void start() {
         frame = new JFrame("Flappy Bird");
         timer = new Timer(DELAY, this);
@@ -51,12 +54,14 @@ public class FlappyBird implements ActionListener {
         panel.repaint();
         if(!isPaused) {
             bird.physics();
+            // Render rectangles for pipes
             if(isRenderRectangle % 95 == 0) {
-                Rectangle r = new Rectangle(WIDTH, 0, GamePanel.PILLAR_WIDTH, (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT));
-                int h2 = (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT);
-                Rectangle r2 = new Rectangle(WIDTH, HEIGHT - h2, GamePanel.PILLAR_WIDTH, h2);
-                rects.add(r);
-                rects.add(r2);
+                Rectangle upperPipe = new Rectangle(WIDTH, 0, GamePanel.PILLAR_WIDTH,
+                    (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT));
+                int height = (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT);
+                Rectangle lowerPipe = new Rectangle(WIDTH, HEIGHT-height, GamePanel.PILLAR_WIDTH, height);
+                rects.add(upperPipe);
+                rects.add(lowerPipe);
             }
             ArrayList<Rectangle> toRemove = new ArrayList<Rectangle>();
             isGameOver = false;
@@ -65,10 +70,12 @@ public class FlappyBird implements ActionListener {
                 if(r.x + r.width <= 0) {
                     toRemove.add(r);
                 }
+                // If bird touches pipe then game is over
                 if(r.intersects(bird.imgRect)) {
                     isGameOver = true;
                 }
-                // If bird reaches center of the column, add 1 to score
+                // If bird reaches center of the column, checks are made for upper 
+                // rectangle only, then add 1 to score
                 if (r.y == 0 && bird.x + bird.imgRect.width / 2 > r.x + r.width / 2 - 2 && 
                     bird.x + bird.imgRect.width / 2 < r.x + r.width / 2 + 2) {
                     score++;
@@ -81,6 +88,7 @@ public class FlappyBird implements ActionListener {
                 isGameOver = true;
             }
 
+            // If game is over then reset game objects
             if(isGameOver) {
                 rects.clear();
                 bird.reset();
@@ -91,6 +99,9 @@ public class FlappyBird implements ActionListener {
         }
     }
 
+    /**
+     * Attach suitable callbacks to control the game
+     */
     private void attachCallbacks() {
         frame.addKeyListener(new KeyAdapter() {
             @Override
