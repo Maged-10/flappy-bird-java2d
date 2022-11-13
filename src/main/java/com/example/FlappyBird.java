@@ -15,7 +15,7 @@ import javax.swing.Timer;
 
 public class FlappyBird implements ActionListener {
     
-    public static final int WIDTH = 900, HEIGHT = 600, DELAY = 10;
+    public static final int WIDTH = 900, HEIGHT = 600, DELAY = 12;
     
     private Bird bird;
     private JFrame frame;
@@ -56,10 +56,10 @@ public class FlappyBird implements ActionListener {
             bird.physics();
             // Render rectangles for pipes
             if(isRenderRectangle % 95 == 0) {
-                Rectangle upperPipe = new Rectangle(WIDTH, 0, GamePanel.PILLAR_WIDTH,
-                    (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT));
-                int height = (int) ((Math.random()*HEIGHT)/5f + (0.2f)*HEIGHT);
-                Rectangle lowerPipe = new Rectangle(WIDTH, HEIGHT-height, GamePanel.PILLAR_WIDTH, height);
+                int height = (int) ((Math.random() * (HEIGHT*2/3 - HEIGHT/3)) + HEIGHT/3);
+                Rectangle upperPipe = new Rectangle(WIDTH, 0, GamePanel.PILLAR_WIDTH, height);
+                Rectangle lowerPipe = new Rectangle(WIDTH, height + bird.sideLength*4, GamePanel.PILLAR_WIDTH,
+                    HEIGHT - height - bird.sideLength*4);
                 rects.add(upperPipe);
                 rects.add(lowerPipe);
             }
